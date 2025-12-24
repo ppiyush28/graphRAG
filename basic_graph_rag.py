@@ -2,6 +2,7 @@ import os
 from langchain_experimental.graph_transformers import LLMGraphTransformer
 from langchain_google_vertexai import VertexAI
 from langchain_google_genai import GoogleGenerativeAI
+from langchain_openai import OpenAI
 import networkx as nx
 #from langchain.chains import GraphQAChain
 from langchain_classic.chains import GraphQAChain
@@ -11,11 +12,15 @@ from langchain_community.graphs.networkx_graph import NetworkxEntityGraph
 from dotenv import load_dotenv
 load_dotenv()
 
-llm = GoogleGenerativeAI(
-    model="gemini-3-pro-preview",
-    max_output_tokens=4000,
-    api_key=os.getenv("GOOGLE_GENAI_API_KEY"),
-)
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+llm = OpenAI(model='gpt-3.5-turbo-instruct',api_key=OPENAI_API_KEY)
+
+# llm = GoogleGenerativeAI(
+#     model="gemini-3-pro", #" "gemini-3-pro-preview",
+#     max_output_tokens=4000,
+#     api_key=os.getenv("GOOGLE_GENAI_API_KEY"),
+# )
 
 text = """
 Marie Curie, born in 1867, was a Polish and naturalised-French physicist and chemist who conducted pioneering research on radioactivity.
@@ -67,3 +72,17 @@ chain = GraphQAChain.from_llm(
 
 question = """Who is Marie Curie?"""
 print(chain.run(question))
+
+"""
+> Entering new GraphQAChain chain...
+Entities Extracted:
+ Marie Curie
+Full Context:
+Marie Curie NATIONALITY Polish
+Marie Curie NATIONALITY French
+Marie Curie WORKED_AT University of Paris
+
+> Finished chain.
+
+Marie Curie is a scientist who worked at the University of Paris. Her nationality is both Polish and French.
+""" 

@@ -7,3 +7,6 @@ networkx
 langchain-classic
 langchain-google-genai
 json-repair
+python-dotenv
+langchain_openai
+pandas
