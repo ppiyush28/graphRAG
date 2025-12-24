@@ -66,4 +66,4 @@ chain = GraphQAChain.from_llm(
 
 
 question = """Who is Marie Curie?"""
-chain.run(question)
+print(chain.run(question))
