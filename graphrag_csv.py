@@ -31,7 +31,6 @@ data['duration'] = data.apply(lambda x:duration(x["duration"]),axis=1)
 print(data.head())
 
 
-
 graph = NetworkxEntityGraph()
 
 # Add nodes to the graph
