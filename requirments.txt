@@ -10,3 +10,4 @@ json-repair
 python-dotenv
 langchain_openai
 pandas
+matplotlib
